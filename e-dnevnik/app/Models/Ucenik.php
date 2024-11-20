@@ -9,6 +9,8 @@ class Ucenik extends Model
 {
     use HasFactory;
 
+    protected $table = 'ucenici';
+
     protected $fillable = [
         'user_id',
         'ime',

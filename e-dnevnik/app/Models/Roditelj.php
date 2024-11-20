@@ -9,6 +9,8 @@ class Roditelj extends Model
 {
     use HasFactory;
 
+    protected $table = 'roditelji';
+
     protected $fillable = [
         'user_id',
         'ime',

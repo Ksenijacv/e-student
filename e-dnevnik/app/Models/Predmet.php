@@ -9,6 +9,8 @@ class Predmet extends Model
 {
     use HasFactory;
 
+    protected $table = 'predmeti';
+
     protected $fillable = [
         'naziv', // naziv predmeta
         'opis', // opis predmeta (opciono)

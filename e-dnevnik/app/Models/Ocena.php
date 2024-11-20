@@ -9,6 +9,8 @@ class Ocena extends Model
 {
     use HasFactory;
 
+    protected $table = 'ocene';
+
     protected $fillable = [
         'ucenik_id',
         'predmet_id',
