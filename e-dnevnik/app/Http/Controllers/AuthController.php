@@ -46,7 +46,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Validacija unosa
+         // Validacija unosa
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -56,20 +56,43 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!Auth::attempt($credentials)) {
-            throw ValidationException::withMessages([
-                'email' => ['Uneli ste neispravne podatke.'],
-            ]);
+            return response()->json([
+                'message' => 'Neispravni podaci za prijavu.'
+            ], 401);
         }
 
-        // Ulogovani korisnik
+        // Dohvatanje ulogovanog korisnika
         $user = Auth::user();
+
+        // Dohvatanje ID-a iz odgovarajućeg modela na osnovu tipa korisnika
+        $relatedModelId = null;
+        switch ($user->tip_korisnika) {
+            case 'profesor':
+                $relatedModelId = $user->profesor ? $user->profesor->id : null;
+                break;
+            case 'ucenik':
+                $relatedModelId = $user->ucenik ? $user->ucenik->id : null;
+                break;
+            case 'roditelj':
+                $relatedModelId = $user->roditelj ? $user->roditelj->id : null;
+                break;
+            case 'admin':
+                // Admin nema dodatni model, pa ostavljamo null ili neki podrazumevani ID
+                $relatedModelId = null;
+                break;
+        }
 
         // Generisanje tokena
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Uspešno ste se prijavili.',
-            'user' => $user,
+            'user' => [
+                'id' => $user->id,
+                'email' => $user->email,
+                'tip_korisnika' => $user->tip_korisnika,
+                'related_model_id' => $relatedModelId, // ID iz odgovarajućeg modela
+            ],
             'token' => $token,
         ]);
     }
