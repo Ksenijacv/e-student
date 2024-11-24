@@ -3,6 +3,10 @@
 use App\Http\Controllers\UcenikController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfesorController;
+use App\Http\Controllers\RoditeljController;
+use App\Http\Controllers\OcenaController;
+use App\Http\Controllers\PredmetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +22,9 @@ use App\Http\Controllers\AuthController;
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/test', [UcenikController::class, 'helloWorld']);
+
+Route::get('/profesori', [ProfesorController::class, 'index']);
+Route::get('/ucenici', [UcenikController::class, 'index']);
+Route::get('/roditelji', [RoditeljController::class, 'index']);
+Route::get('/ocene', [OcenaController::class, 'index']);
+Route::get('/predmeti', [PredmetController::class, 'index']);
