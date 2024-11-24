@@ -38,13 +38,13 @@ const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
             // Preusmeravanje na odgovarajući dashboard
             switch (user.tip_korisnika) {
                 case "profesor":
-                    navigate("/dashboard");
+                    navigate("/dashboard-profesor");
                     break;
                 case "ucenik":
-                    navigate("/dashboard");
+                    navigate("/dashboard-ucenik");
                     break;
                 case "roditelj":
-                    navigate("/dashboard");
+                    navigate("/dashboard-roditelj");
                     break;
                 default:
                     navigate("/");
