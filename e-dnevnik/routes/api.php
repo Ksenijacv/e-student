@@ -22,6 +22,11 @@ use App\Http\Controllers\PredmetController;
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//da se prilikom registracije poziva i ovo kreiranje
+Route::post('/profesor', [ProfesorController::class, 'store']);
+Route::post('/ucenik', [UcenikController::class, 'store']);
+Route::post('/roditelj', [RoditeljController::class, 'store']);
+
 
 Route::get('/profesori', [ProfesorController::class, 'index']);
 Route::get('/ucenici', [UcenikController::class, 'index']);
@@ -31,4 +36,10 @@ Route::get('/predmeti', [PredmetController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    
+
+
+
+
 });  
