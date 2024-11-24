@@ -28,3 +28,7 @@ Route::get('/ucenici', [UcenikController::class, 'index']);
 Route::get('/roditelji', [RoditeljController::class, 'index']);
 Route::get('/ocene', [OcenaController::class, 'index']);
 Route::get('/predmeti', [PredmetController::class, 'index']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});  
