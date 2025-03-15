@@ -281,8 +281,58 @@ select {
     margin-top: 15px;
 }
 
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: var(--secondary-color);
+    color:var(--text-color);
+}
 
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1300px;
+    gap: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
 
+.profile-info {
+    flex: 4;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.student-info {
+    margin-bottom: 20px;
+}
+
+/* Parent info */
+.parent-info {
+    padding-top: 15px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 60px;
+}
+
+.profile-image {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 
 
