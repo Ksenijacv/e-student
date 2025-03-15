@@ -28,8 +28,9 @@ const UcenikForm = () => {
 
             setMessage("Učenik uspešno kreiran!");
             console.log("Učenik kreiran:", response.data);
+            alert("Uspesno ste uneli podatke za ucenika!");
 
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             console.error("Greška prilikom kreiranja učenika:", error.response ? error.response.data : error.message);
             setError("Greška prilikom kreiranja učenika. Proverite unete podatke.");
@@ -37,11 +38,12 @@ const UcenikForm = () => {
     };
 
     return (
-        <div>
-            <h2>Dodavanje podataka za učenika</h2>
+        <div className="user-page">
+            
             {error && <p style={{ color: "red" }}>{error}</p>}
             {message && <p style={{ color: "green" }}>{message}</p>}
-            <form onSubmit={handleSubmit}>
+            <form  className="user-form" onSubmit={handleSubmit}>
+            <h2>Dodavanje podataka za učenika</h2>
                 <label>
                     Ime:
                     <input type="text" value={ime} onChange={(e) => setIme(e.target.value)} required />

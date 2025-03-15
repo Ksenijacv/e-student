@@ -29,9 +29,10 @@ const ProfesorForm = () => {
 
             setMessage("Profesor uspešno kreiran!");
             console.log("Profesor kreiran:", response.data);
+            alert("Uspesno ste uneli podatke za profesora!");
 
             // Nakon uspešnog unosa podataka, preusmeravanje na login stranicu
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             console.error("Greška prilikom kreiranja profesora:", error.response ? error.response.data : error.message);
             setError("Greška prilikom kreiranja profesora. Proverite unete podatke.");
@@ -39,11 +40,11 @@ const ProfesorForm = () => {
     };
 
     return (
-        <div>
-            <h2>Dodavanje podataka za profesora</h2>
+        <div className="user-page">
             {error && <p style={{ color: "red" }}>{error}</p>}
             {message && <p style={{ color: "green" }}>{message}</p>}
-            <form onSubmit={handleSubmit}>
+            <form className="user-form" onSubmit={handleSubmit}>
+            <h2>Dodavanje podataka za profesora</h2>
                 <label>
                     Ime:
                     <input

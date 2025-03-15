@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import image1 from "../images/image1.png";
 
 const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
     const [email, setEmail] = useState("");
@@ -57,10 +58,12 @@ const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
     };
 
     return (
-        <div>
-            <h2>Prijava</h2>
+        <div className="login-page">
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <form onSubmit={handleSubmit}>
+            <div className="login-container"> 
+            <img src={image1} alt="Registracija" className="login-image" />
+            <form className="login-form" onSubmit={handleSubmit}>
+            <h2>Prijava</h2>
                 <label>
                     Email:
                     <input
@@ -81,6 +84,7 @@ const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
                 </label>
                 <button type="submit">Prijavi se</button>
             </form>
+            </div>
         </div>
     );
 };

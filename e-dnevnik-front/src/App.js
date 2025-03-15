@@ -9,6 +9,7 @@ import RoditeljForm from "./components/RoditeljForm";
 import ProfesorDashboard from "./components/ProfesorDashboard";
 import UcenikDashboard from "./components/UcenikDashboard";
 import RoditeljDashboard from "./components/RoditeljDashboard";
+import './App.css';
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -34,7 +35,7 @@ function App() {
                     {/* Opšte rute za sve korisnike */}
                     
                     <Route
-                        path="/login"
+                        path="/"
                         element={
                             <LoginForm
                                 setToken={setToken}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaBook } from "react-icons/fa"; 
 
 const Navbar = ({ token, setToken, tipKorisnika }) => {
     const navigate = useNavigate();
@@ -7,45 +8,51 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
     const handleLogout = () => {
         sessionStorage.clear();
         setToken(null);
-        navigate("/login");
+        navigate("/");
     };
 
     return (
-        <nav>
-            <ul>
-                {!token ? (
-                    <>
+        <nav className="navbar">
+        <div className="nav-logo">
+            <FaBook className="nav-icon" />
+            <span>E-dnevnik</span>
+        </div>
+        <ul className="nav-links">
+            {!token ? (
+                <>
+                    <li>
+                        <Link to="/">Prijava</Link>
+                    </li>
+                    <li>
+                        <Link to="/register">Registracija</Link>
+                    </li>
+                </>
+            ) : (
+                <>
+                    {tipKorisnika === "profesor" && (
                         <li>
-                            <Link to="/login">Prijava</Link>
+                            <Link to="/dashboard-profesor">Dashboard Profesora</Link>
                         </li>
+                    )}
+                    {tipKorisnika === "ucenik" && (
                         <li>
-                            <Link to="/register">Registracija</Link>
+                            <Link to="/dashboard-ucenik">Dashboard Učenika</Link>
                         </li>
-                    </>
-                ) : (
-                    <>
-                        {tipKorisnika === "profesor" && (
-                            <li>
-                                <Link to="/dashboard-profesor">Dashboard Profesora</Link>
-                            </li>
-                        )}
-                        {tipKorisnika === "ucenik" && (
-                            <li>
-                                <Link to="/dashboard-ucenik">Dashboard Učenika</Link>
-                            </li>
-                        )}
-                        {tipKorisnika === "roditelj" && (
-                            <li>
-                                <Link to="/dashboard-roditelj">Dashboard Roditelja</Link>
-                            </li>
-                        )}
+                    )}
+                    {tipKorisnika === "roditelj" && (
                         <li>
-                            <button onClick={handleLogout}>Odjava</button>
+                            <Link to="/dashboard-roditelj">Dashboard Roditelja</Link>
                         </li>
-                    </>
-                )}
-            </ul>
-        </nav>
+                    )}
+                    <li>
+                        <button className="logout-button" onClick={handleLogout}>
+                            Odjava 
+                        </button>
+                    </li>
+                </>
+            )}
+        </ul>
+    </nav>
     );
 };
 

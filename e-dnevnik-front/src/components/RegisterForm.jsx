@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import image1 from "../images/image1.png";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState("");
@@ -39,7 +40,11 @@ const RegisterForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className = "login-page"> 
+        <div className="login-container"> 
+        <img src={image1} alt="Registracija" className="login-image" />
+        <form className="login-form"  onSubmit={handleSubmit}>
+        <h2>Registracija</h2>
             <label>Email:</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             <label>Lozinka:</label>
@@ -54,6 +59,8 @@ const RegisterForm = () => {
             <button type="submit">Registruj se</button>
             {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
+        </div>
+        </div>
     );
 };
 
