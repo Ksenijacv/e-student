@@ -35,6 +35,9 @@ Route::get('/ocene', [OcenaController::class, 'index']);
 Route::get('/predmeti', [PredmetController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/ucenici/{id}', [UcenikController::class, 'show']);
+    Route::put('/ucenici/{id}', [UcenikController::class, 'update']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     

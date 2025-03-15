@@ -19,8 +19,12 @@ class UcenikResource extends JsonResource
             'ime' => $this->ime,
             'razred' => $this->razred,
             'odeljenje' => $this->odeljenje,
-            'roditelj_id' => $this->roditelj ? $this->roditelj->id : null, 
-            'ocene' => OcenaResource::collection($this->whenLoaded('ocene')), // Samo kada su ocene učitane
+            'roditelj' => $this->roditelj ? [
+                'id' => $this->roditelj->id,
+                'ime' => $this->roditelj->ime,
+                'kontakt' => $this->roditelj->kontakt, 
+            ] : null,
+            'ocene' => OcenaResource::collection($this->whenLoaded('ocene')),
         ];
     }
 }

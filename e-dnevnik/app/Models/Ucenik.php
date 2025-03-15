@@ -26,7 +26,7 @@ class Ucenik extends Model
 
     public function roditelj()
     {
-        return $this->belongsTo(Roditelj::class);
+        return $this->belongsTo(Roditelj::class, 'roditelj_id');
     }
 
     public function ocene()
