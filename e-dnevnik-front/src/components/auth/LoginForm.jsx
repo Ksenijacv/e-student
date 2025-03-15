@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import image1 from "../images/image1.png";
+import image1 from "../../images/image1.png";
 
 const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
     const [email, setEmail] = useState("");

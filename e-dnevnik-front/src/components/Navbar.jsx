@@ -35,9 +35,14 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
                         </li>
                     )}
                     {tipKorisnika === "ucenik" && (
-                        <li>
-                            <Link to="/dashboard-ucenik">Dashboard Učenika</Link>
-                        </li>
+                        <>
+                            <li>
+                                <Link to="/dashboard-ucenik">Dashboard Učenika</Link>
+                            </li>
+                            <li>
+                            <Link to="/ucenik-profile">Moj Profil</Link>
+                            </li>
+                         </>
                     )}
                     {tipKorisnika === "roditelj" && (
                         <li>

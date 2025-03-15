@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import useRoditelji from "../../hooks/useRoditelji"; 
+import axios from "axios";
 
 const UcenikForm = () => {
     const location = useLocation();
@@ -13,6 +14,9 @@ const UcenikForm = () => {
     const [roditeljId, setRoditeljId] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
+
+    // Koristi custom hook za dohvatanje roditelja
+    const { roditelji, loading, error: roditeljiError } = useRoditelji();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,9 +31,7 @@ const UcenikForm = () => {
             });
 
             setMessage("Učenik uspešno kreiran!");
-            console.log("Učenik kreiran:", response.data);
-            alert("Uspesno ste uneli podatke za ucenika!");
-
+            alert("Uspešno ste uneli podatke za učenika!");
             navigate("/");
         } catch (error) {
             console.error("Greška prilikom kreiranja učenika:", error.response ? error.response.data : error.message);
@@ -39,27 +41,44 @@ const UcenikForm = () => {
 
     return (
         <div className="user-page">
-            
             {error && <p style={{ color: "red" }}>{error}</p>}
             {message && <p style={{ color: "green" }}>{message}</p>}
-            <form  className="user-form" onSubmit={handleSubmit}>
-            <h2>Dodavanje podataka za učenika</h2>
+            {roditeljiError && <p style={{ color: "red" }}>{roditeljiError}</p>}
+            
+            <form className="user-form" onSubmit={handleSubmit}>
+                <h2>Dodavanje podataka za učenika</h2>
+
                 <label>
                     Ime:
                     <input type="text" value={ime} onChange={(e) => setIme(e.target.value)} required />
                 </label>
+
                 <label>
                     Razred:
                     <input type="number" value={razred} onChange={(e) => setRazred(e.target.value)} required />
                 </label>
+
                 <label>
                     Odeljenje:
                     <input type="text" value={odeljenje} onChange={(e) => setOdeljenje(e.target.value)} required />
                 </label>
+
                 <label>
-                    Roditelj ID (opciono):
-                    <input type="text" value={roditeljId} onChange={(e) => setRoditeljId(e.target.value)} />
+                    Roditelj:
+                    {loading ? (
+                        <p>Učitavanje roditelja...</p>
+                    ) : (
+                        <select value={roditeljId} onChange={(e) => setRoditeljId(e.target.value)} required>
+                            <option value="">Izaberite roditelja</option>
+                            {roditelji.map((roditelj) => (
+                                <option key={roditelj.id} value={roditelj.id}>
+                                    {roditelj.ime} {roditelj.prezime}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                 </label>
+
                 <button type="submit">Sačuvaj</button>
             </form>
         </div>

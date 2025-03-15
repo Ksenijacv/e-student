@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-import ProfesorForm from "./components/ProfesorForm";
-import UcenikForm from "./components/UcenikForm";
-import RoditeljForm from "./components/RoditeljForm";
-import ProfesorDashboard from "./components/ProfesorDashboard";
-import UcenikDashboard from "./components/UcenikDashboard";
-import RoditeljDashboard from "./components/RoditeljDashboard";
+import LoginForm from "./components/auth/LoginForm";
+import RegisterForm from "./components/auth/RegisterForm";
+import ProfesorForm from "./components/profesor/ProfesorForm";
+import UcenikForm from "./components/ucenik/UcenikForm";
+import RoditeljForm from "./components/roditelj/RoditeljForm";
+import ProfesorDashboard from "./components/profesor/ProfesorDashboard";
+import UcenikDashboard from "./components/ucenik/UcenikDashboard";
+import RoditeljDashboard from "./components/roditelj/RoditeljDashboard";
+import UcenikProfile from "./components/ucenik/UcenikProfile";
 import './App.css';
 
 function App() {
@@ -57,13 +58,22 @@ function App() {
 
                     {/* Dashboard rute za ulogovane korisnike */}
                     {token && tipKorisnika === "profesor" && (
+                        <>
                         <Route path="/dashboard-profesor" element={<ProfesorDashboard />} />
+                        </>
                     )}
+
                     {token && tipKorisnika === "ucenik" && (
+                        <>
                         <Route path="/dashboard-ucenik" element={<UcenikDashboard />} />
+                        <Route path="/ucenik-profile" element={<UcenikProfile />} />
+                        </>
                     )}
+
                     {token && tipKorisnika === "roditelj" && (
+                        <>
                         <Route path="/dashboard-roditelj" element={<RoditeljDashboard />} />
+                        </>
                     )}
                 </Routes>
             </BrowserRouter>

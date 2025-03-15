@@ -68,7 +68,7 @@ button:hover {
     color: var(--text-color);
 }
 
-.login-form input, .user-form input {
+.login-form input, .user-form input, .modal-content input {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
@@ -80,7 +80,7 @@ button:hover {
 }
 
 /* Input fokus efekat */
-.login-form input:focus, .user-form input:focus {
+.login-form input:focus, .user-form input:focus, .modal-content input:focus {
     border-color: var(--text-color);
     outline: none;
 }
@@ -240,6 +240,45 @@ select {
 
 .user-form {
     margin: 50px 10px 20px 20px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content{
+    background: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.modal-content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 
