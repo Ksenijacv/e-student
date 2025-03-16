@@ -19,8 +19,8 @@ class OcenaResource extends JsonResource
             'ocena' => $this->ocena,
             'datum' => $this->datum,
             'komentar' => $this->komentar,
-            'ucenik_id' => $this->ucenik ? $this->ucenik->id : null, // Samo ID učenika
-            'predmet_id' => $this->predmet ? $this->predmet->id : null, // Samo ID predmeta
+            'ucenik' =>new UcenikResource($this->whenLoaded('ucenik')),
+            'predmet' => new PredmetResource($this->whenLoaded('predmet')),
         ];
     }
 }

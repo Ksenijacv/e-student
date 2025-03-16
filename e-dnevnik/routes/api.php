@@ -47,7 +47,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/profesori/ukloni-predmet/{predmet_id}', [ProfesorController::class, 'ukloniPredmet']);
 
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
-    
+
+    Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     
