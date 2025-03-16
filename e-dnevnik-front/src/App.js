@@ -14,6 +14,8 @@ import './App.css';
 import RoditeljProfile from "./components/roditelj/RoditeljProfile";
 import ProfesorProfile from "./components/profesor/ProfesorProfile";
 import Footer from "./components/Footer";
+import AdminDashboard from "./components/admin/AdminDashboard";
+
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -78,6 +80,11 @@ function App() {
                         <>
                         <Route path="/dashboard-roditelj" element={<RoditeljDashboard />} />
                         <Route path="/roditelj-profile" element={<RoditeljProfile />} />
+                        </>
+                    )}
+                     {token && tipKorisnika === "admin" && (
+                        <>
+                        <Route path="/dashboard-admin" element={<AdminDashboard />} />
                         </>
                     )}
                 </Routes>

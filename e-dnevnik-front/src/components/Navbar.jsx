@@ -59,6 +59,14 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
                             </li>
                         </>
                     )}
+                    {tipKorisnika === "admin" && (
+                        <>
+                            <li>
+                                <Link to="/dashboard-admin">Dashboard Administratora</Link>
+                            </li>
+                        
+                        </>
+                    )}
                     <li>
                         <button className="logout-button" onClick={handleLogout}>
                             Odjava 

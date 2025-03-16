@@ -47,6 +47,9 @@ const LoginForm = ({ setToken, setTipKorisnika, setRelatedModelId }) => {
                 case "roditelj":
                     navigate("/dashboard-roditelj");
                     break;
+                case "admin":
+                    navigate("/dashboard-admin");
+                    break;
                 default:
                     navigate("/");
                     break;

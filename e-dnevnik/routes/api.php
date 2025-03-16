@@ -27,7 +27,6 @@ Route::post('/profesor', [ProfesorController::class, 'store']);
 Route::post('/ucenik', [UcenikController::class, 'store']);
 Route::post('/roditelj', [RoditeljController::class, 'store']);
 
-
 Route::get('/profesori', [ProfesorController::class, 'index']);
 Route::get('/ucenici', [UcenikController::class, 'index']);
 Route::get('/roditelji', [RoditeljController::class, 'index']);
@@ -48,14 +47,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
 
+    Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
+
     Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
     Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
-    
-
-
-
 
 });  

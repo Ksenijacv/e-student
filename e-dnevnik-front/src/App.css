@@ -379,7 +379,7 @@ select {
     min-height: 500px;
 }
 
-.profesor-profile-container {
+.profesor-profile-container{
     width: 80%;
     display: flex;
     flex-direction: column; 
@@ -523,7 +523,7 @@ select {
     padding-right: 40px;
 }
 
-.roditelj-dashboard {
+.roditelj-dashboard, .admin-dashboard{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -532,12 +532,23 @@ select {
     min-height: 500px;
 }
 
+.chart-section {
+    width: 1200px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 30px;
+
+}
+
 .pagination {
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
+
 
 
 
