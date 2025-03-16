@@ -22,7 +22,7 @@ class Roditelj extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ucenik()
+    public function ucenici()
     {
         return $this->hasMany(Ucenik::class, 'roditelj_id');
     }

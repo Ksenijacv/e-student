@@ -18,7 +18,7 @@ class RoditeljResource extends JsonResource
             'id' => $this->id,
             'ime' => $this->ime,
             'kontakt' => $this->kontakt,
-            'ucenici' => UcenikResource::collection($this->whenLoaded('ucenici')), // Samo kada su učenici učitani
+            'ucenici' => UcenikResource::collection($this->whenLoaded('ucenici')), 
         ];
     }
 }

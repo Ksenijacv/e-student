@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/ucenici/{id}', [UcenikController::class, 'show']);
     Route::put('/ucenici/{id}', [UcenikController::class, 'update']);
 
+    Route::get('/roditelji/{id}', [RoditeljController::class, 'show']);
+    Route::put('/roditelji/{id}', [RoditeljController::class, 'update']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     
