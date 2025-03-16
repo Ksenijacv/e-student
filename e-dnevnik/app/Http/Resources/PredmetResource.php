@@ -22,6 +22,8 @@ class PredmetResource extends JsonResource
             'profesor' => $this->profesor ? [
                 'id' => $this->profesor->id,
                 'ime' => $this->profesor->ime,
+                'kabinet'=> $this->profesor->kabinet,
+                'konsultacije'=> $this->profesor->konsultacije,
             ] : null
 
         ];

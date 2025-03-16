@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
 
     Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
+    Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 

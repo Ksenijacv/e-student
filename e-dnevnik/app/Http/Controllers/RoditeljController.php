@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RoditeljResource;
 use App\Models\Roditelj;
+use App\Models\Ucenik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,6 +90,8 @@ class RoditeljController extends Controller
                 'roditelj' => new RoditeljResource($roditelj),
             ], 200);
         }
+
+        
     
     
 }
