@@ -11,6 +11,7 @@ import UcenikDashboard from "./components/ucenik/UcenikDashboard";
 import RoditeljDashboard from "./components/roditelj/RoditeljDashboard";
 import UcenikProfile from "./components/ucenik/UcenikProfile";
 import './App.css';
+import RoditeljProfile from "./components/roditelj/RoditeljProfile";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -73,6 +74,7 @@ function App() {
                     {token && tipKorisnika === "roditelj" && (
                         <>
                         <Route path="/dashboard-roditelj" element={<RoditeljDashboard />} />
+                        <Route path="/roditelj-profile" element={<RoditeljProfile />} />
                         </>
                     )}
                 </Routes>

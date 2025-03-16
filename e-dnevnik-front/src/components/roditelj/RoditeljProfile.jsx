@@ -2,44 +2,50 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "../EditModal";
 import usePexelsImage from "../../hooks/usePexelsImage";
+import ReusableTable from "../ReusableTable";
 
-const UcenikProfile = () => {
-    const [ucenik, setUcenik] = useState(null);
+const RoditeljProfile = () => {
+    const [roditelj, setRoditelj] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editableFields, setEditableFields] = useState({});
 
-    const ucenikImage = usePexelsImage("student");
+    const parentImage = usePexelsImage("parent student horizontal");
+
+    //za tabelu dece od roditelja
+    const columns = [
+        { key: "ime", label: "Ime" },
+        { key: "razred", label: "Razred" },
+        { key: "odeljenje", label: "Odeljenje" },
+    ];
 
     // Uzimamo podatke iz sessionStorage
-    const [ucenikId, setUcenikId] = useState(sessionStorage.getItem("related_model_id"));
+    const [roditeljId, setRoditeljId] = useState(sessionStorage.getItem("related_model_id"));
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
 
-    const fetchUcenik = async () => {
-        if (!ucenikId || !token) {
+  
+    const fetchRoditelj = async () => {
+        if (!roditeljId || !token) {
             setError("Nedostaju podaci za autentifikaciju.");
             return;
         }
-
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/ucenici/${ucenikId}`, {
+            const response = await axios.get(`http://127.0.0.1:8000/api/roditelji/${roditeljId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-
-            setUcenik(response.data.data);
+            setRoditelj(response.data.data);
             setEditableFields({
-                razred: response.data.razred,
-                odeljenje: response.data.odeljenje,
-                roditelj_id: response.data.roditelj ? response.data.roditelj.id : "",
+                ime: response.data.data.ime,
+                kontakt: response.data.data.kontakt,
             });
 
         } catch (err) {
-            console.error("Greška prilikom učitavanja profila učenika:", err);
-            setError("Greška prilikom učitavanja profila učenika.");
+            console.error("Greška prilikom učitavanja profila roditelja:", err);
+            setError("Greška prilikom učitavanja profila roditelja.");
         } finally {
             setLoading(false);
         }
@@ -47,20 +53,20 @@ const UcenikProfile = () => {
 
 
     useEffect(() => {
-        if (!ucenikId || !token) {
-            console.error("Ne može se pozvati fetchUcenik() jer nema `ucenikId` ili `token`.");
+        if (!roditeljId || !token) {
+            console.error("Ne može se pozvati fetchRoditelj() jer nema `roditeljId` ili `token`.");
             return;
         }
-        fetchUcenik();
 
-    }, [ucenikId, token]);
+        fetchRoditelj();
 
-   
-//azuriranje profila ucenika
+    }, [roditeljId, token]);
+
+    //azuriranje profila roditelja
     const handleUpdate = async (updatedData) => {
         try {
             const response = await axios.put(
-                `http://127.0.0.1:8000/api/ucenici/${ucenikId}`,
+                `http://127.0.0.1:8000/api/roditelji/${roditeljId}`,
                 updatedData,
                 {
                     headers: {
@@ -69,18 +75,12 @@ const UcenikProfile = () => {
                     },
                 }
             );
-    
-            // Odmah ažuriramo podatke učenika u state-u
-            setUcenik((prev) => ({
-                ...prev,
-                ...response.data.ucenik, 
-                roditelj: response.data.ucenik.roditelj 
-            }));
-    
-            setIsModalOpen(false); // Zatvaramo modal
+
+            setRoditelj(response.data.data);
+            setIsModalOpen(false);
             alert("Profil uspešno ažuriran!");
         } catch (err) {
-            console.error("Greška pri ažuriranju učenika:", err);
+            console.error("Greška pri ažuriranju roditelja:", err);
             alert("Greška pri ažuriranju profila.");
         }
     };
@@ -88,36 +88,34 @@ const UcenikProfile = () => {
     return (
         <div className="profile-page">
             <h2>Moj Profil</h2>
-    
+
             {loading && <p>Učitavanje podataka...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
-    
-            {ucenik ? (
+
+            {roditelj ? (
                 <div className="profile-container">
-                    {/* Leva strana - Podaci učenika i roditelja */}
+                    {/* Leva strana - Podaci o roditelju i deci */}
                     <div className="profile-info">
-                        <div className="student-info">
-                            <h3>Podaci o učeniku</h3>
-                            <p><strong>Ime:</strong> {ucenik.ime || "Nema podataka"}</p>
-                            <p><strong>Razred:</strong> {ucenik.razred || "Nema podataka"}</p>
-                            <p><strong>Odeljenje:</strong> {ucenik.odeljenje || "Nema podataka"}</p>
+                        <div className="parent-info">
+                            <h3>Podaci o roditelju</h3>
+                            <p><strong>Ime:</strong> {roditelj.ime || "Nema podataka"}</p>
+                            <p><strong>Kontakt:</strong> {roditelj.kontakt || "Nema kontakta"}</p>
                         </div>
-    
-                        {ucenik.roditelj && (
-                            <div className="parent-info">
-                                <h3>Podaci o roditelju</h3>
-                                <p><strong>Roditelj:</strong> {ucenik.roditelj.ime || "Nepoznato"}</p>
-                                <p><strong>Kontakt:</strong> {ucenik.roditelj.kontakt || "Nema kontakta"}</p>
+
+                        {roditelj.ucenici && roditelj.ucenici.length > 0 && (
+                            <div className="children-info">
+                                <h3>Moji ucenici</h3>
+                                <ReusableTable columns={columns} data={roditelj.ucenici} />
                             </div>
                         )}
-    
+
                         <button className="edit-btn" onClick={() => setIsModalOpen(true)}>Ažuriraj profil</button>
                     </div>
-    
-                    {/* Pexels API slika */}
+
+                    {/* Desna strana - Random slika roditelja */}
                     <div className="profile-image">
-                        {ucenikImage ? (
-                            <img src={ucenikImage} alt="Random ucenik" />
+                        {parentImage ? (
+                            <img src={parentImage} alt="Random parent" />
                         ) : (
                             <p>Učitavanje slike...</p>
                         )}
@@ -126,7 +124,7 @@ const UcenikProfile = () => {
             ) : (
                 <></>
             )}
-    
+
             {/* Modal za ažuriranje */}
             <EditModal
                 isOpen={isModalOpen}
@@ -136,7 +134,6 @@ const UcenikProfile = () => {
             />
         </div>
     );
-    
 };
 
-export default UcenikProfile;
+export default RoditeljProfile;

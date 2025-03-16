@@ -313,11 +313,11 @@ select {
     margin-bottom: 20px;
 }
 
-/* Parent info */
 .parent-info {
     padding-top: 15px;
     border-top: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 60px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
 }
 
 .profile-image {
@@ -334,7 +334,33 @@ select {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.reusable-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: var(--secondary-color);
+    opacity: 70%;
+    border-radius: 8px;
+    overflow: hidden;
+}
 
+.reusable-table th, .reusable-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.reusable-table th {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+
+
+.reusable-table tr:hover {
+    background-color: #43547a;
+    transition: 0.3s;
+}
 
 
 

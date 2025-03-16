@@ -30,9 +30,14 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
             ) : (
                 <>
                     {tipKorisnika === "profesor" && (
-                        <li>
-                            <Link to="/dashboard-profesor">Dashboard Profesora</Link>
-                        </li>
+                        <>
+                            <li>
+                                <Link to="/dashboard-profesor">Dashboard Profesora</Link>
+                            </li>
+                            <li>
+                            <Link to="/profesor-profile">Moj Profil</Link>
+                            </li>
+                        </>
                     )}
                     {tipKorisnika === "ucenik" && (
                         <>
@@ -45,9 +50,14 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
                          </>
                     )}
                     {tipKorisnika === "roditelj" && (
-                        <li>
-                            <Link to="/dashboard-roditelj">Dashboard Roditelja</Link>
-                        </li>
+                        <> 
+                            <li>
+                                <Link to="/dashboard-roditelj">Dashboard Roditelja</Link>
+                            </li>
+                            <li>
+                                <Link to="/roditelj-profile">Moj Profil</Link>
+                            </li>
+                        </>
                     )}
                     <li>
                         <button className="logout-button" onClick={handleLogout}>
