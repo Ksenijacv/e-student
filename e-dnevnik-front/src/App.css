@@ -529,6 +529,14 @@ select {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    min-height: 500px;
+}
+
+.pagination {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 
