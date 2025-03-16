@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('naziv');
             $table->text('opis')->nullable(); // Opis predmeta (opciono)
             $table->integer('tezina'); // Težina predmeta (npr. 1-5)
-            $table->foreignId('profesor_id')->constrained('profesori')->onDelete('cascade');
+            $table->foreignId('profesor_id')->nullable()->constrained('profesori')->onDelete('set null');
             $table->timestamps();
         });
     }

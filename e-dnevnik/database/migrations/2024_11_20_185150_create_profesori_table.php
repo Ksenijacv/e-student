@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('ime');
-            $table->string('titula'); // Docent, Redovni profesor, itd.
+            $table->string('titula'); 
             $table->string('kabinet');
-            $table->string('konsultacije'); // npr. "Utorak 15-17h"
+            $table->string('konsultacije'); 
             $table->timestamps();
         });
     }

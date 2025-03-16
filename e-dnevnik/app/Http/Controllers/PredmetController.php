@@ -13,4 +13,12 @@ class PredmetController extends Controller
         $predmeti = Predmet::paginate(10); // Paginacija po 10 zapisa
         return PredmetResource::collection($predmeti);
     }
+
+    public function dostupniPredmeti()
+    {
+        $predmeti = Predmet::whereNull('profesor_id')->get();
+        return PredmetResource::collection($predmeti);
+    }
+
+
 }

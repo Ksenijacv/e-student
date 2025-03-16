@@ -43,7 +43,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/profesori/{id}', [ProfesorController::class, 'show']);
     Route::put('/profesori/{id}', [ProfesorController::class, 'update']);
+    Route::post('/profesori/dodaj-predmet', [ProfesorController::class, 'dodajPredmet']);
+    Route::delete('/profesori/ukloni-predmet/{predmet_id}', [ProfesorController::class, 'ukloniPredmet']);
 
+    Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
+    
     Route::post('/logout', [AuthController::class, 'logout']);
 
     

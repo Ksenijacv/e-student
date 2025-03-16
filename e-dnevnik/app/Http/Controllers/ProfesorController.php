@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PredmetResource;
 use App\Http\Resources\ProfesorResource;
+use App\Models\Predmet;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,8 +34,6 @@ class ProfesorController extends Controller
 
         return new ProfesorResource($profesor);
     }
-
-
 
     public function store(Request $request)
     {
@@ -98,6 +98,88 @@ class ProfesorController extends Controller
                 'profesor' => new ProfesorResource($profesor),
             ], 200);
         }
+
+    public function dodajPredmet(Request $request)
+        {
+            $user = Auth::user();
+
+            // Provera da li je korisnik profesor
+            if ($user->tip_korisnika !== 'profesor') {
+                return response()->json(['error' => 'Nemate dozvolu za ovu akciju.'], 403);
+            }
+        
+            // Pronalazimo profesora na osnovu `user_id`
+            $profesor = Profesor::where('user_id', $user->id)->first();
+        
+            if (!$profesor) {
+                return response()->json(['error' => 'Profesor nije pronađen.'], 404);
+            }
+        
+            // Validacija da predmet postoji
+            $validated = $request->validate([
+                'predmet_id' => 'required|exists:predmeti,id'
+            ]);
+        
+            $predmet = Predmet::findOrFail($validated['predmet_id']);
+        
+            // Proveravamo da li predmet već ima profesora
+            if ($predmet->profesor_id) {
+                return response()->json(['error' => 'Ovaj predmet već ima profesora.'], 400);
+            }
+        
+             // Proveravamo da li profesor_id nije null pre dodeljivanja -ne sme biti null
+            if (!$profesor->id) {
+                return response()->json(['error' => 'Greška: profesor ID je nepoznat.'], 500);
+            }
+
+            // Ažuriramo predmet sa profesorom
+            $predmet->profesor_id = $profesor->id;
+            $predmet->save();
+        
+            return response()->json([
+                'message' => 'Predmet uspešno dodeljen profesoru.',
+                'predmet' => new PredmetResource($predmet),
+            ], 200);
+        }
+
+        public function ukloniPredmet($predmet_id)
+        {
+            $user = Auth::user();
+        
+            // Proveravamo da li je korisnik profesor
+            if ($user->tip_korisnika !== 'profesor') {
+                return response()->json(['error' => 'Nemate dozvolu za ovu akciju.'], 403);
+            }
+        
+            // Pronalazimo profesora na osnovu user_id
+            $profesor = Profesor::where('user_id', $user->id)->first();
+        
+            if (!$profesor) {
+                return response()->json(['error' => 'Profesor nije pronađen.'], 404);
+            }
+        
+            // Pronalazimo predmet
+            $predmet = Predmet::find($predmet_id);
+        
+            if (!$predmet) {
+                return response()->json(['error' => 'Predmet nije pronađen.'], 404);
+            }
+        
+            // Proveravamo da li ovaj profesor predaje taj predmet
+            if ($predmet->profesor_id !== $profesor->id) {
+                return response()->json(['error' => 'Ne možete ukloniti predmet koji ne predajete.'], 403);
+            }
+        
+            // Postavljamo profesor_id na NULL
+            $predmet->profesor_id = null;
+            $predmet->save();
+        
+            return response()->json([
+                'message' => 'Predmet je uspešno uklonjen iz vašeg naloga.',
+                'predmet' => new PredmetResource($predmet),
+            ], 200);
+        }
+
 
 
 

@@ -31,15 +31,15 @@ class ProfesorSeeder extends Seeder
 
         //predmet koji predaje taj profesor
         Predmet::factory()->create([
-            'naziv' => 'Matematika',
-            'opis' => 'Osnove matematike za 3. razred',
-            'tezina' => 5,
+            'naziv' => 'Vajanje',
+            'opis' => 'Osnove vajarstva za ucenike',
+            'tezina' => 2,
             'profesor_id' => $profesor->id,
         ]);
 
         Predmet::factory()->create([
-            'naziv' => 'Fizika',
-            'opis' => 'Osnovni zakoni fizike',
+            'naziv' => 'Ruski jezik',
+            'opis' => 'Ruski jezik A1 nivoa tezine',
             'tezina' => 4,
             'profesor_id' => $profesor->id,
         ]);
