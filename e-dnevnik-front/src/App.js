@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/reusable/Navbar";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
 import ProfesorForm from "./components/profesor/ProfesorForm";
@@ -13,7 +13,7 @@ import UcenikProfile from "./components/ucenik/UcenikProfile";
 import './App.css';
 import RoditeljProfile from "./components/roditelj/RoditeljProfile";
 import ProfesorProfile from "./components/profesor/ProfesorProfile";
-import Footer from "./components/Footer";
+import Footer from "./components/reusable/Footer";
 import AdminDashboard from "./components/admin/AdminDashboard";
 
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EditModal from "../EditModal";
+import EditModal from "../reusable/EditModal";
 import usePexelsImage from "../../hooks/usePexelsImage";
-import ReusableTable from "../ReusableTable";
+import ReusableTable from "../reusable/ReusableTable";
 
 const RoditeljProfile = () => {
     const [roditelj, setRoditelj] = useState(null);

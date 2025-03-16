@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RenderTezina from "../RenderTezina";
-import RenderOcena from "../RenderOcena";
+import RenderTezina from "../reusable/RenderTezina";
+import RenderOcena from "../reusable/RenderOcena";
 
 const UcenikDashboard = () => {
     const [ocene, setOcene] = useState([]);

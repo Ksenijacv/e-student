@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EditModal from "../EditModal";
-import ReusableTable from "../ReusableTable";
+import EditModal from "../reusable/EditModal";
+import ReusableTable from "../reusable/ReusableTable";
 
 const ProfesorProfile = () => {
     const [profesor, setProfesor] = useState(null);

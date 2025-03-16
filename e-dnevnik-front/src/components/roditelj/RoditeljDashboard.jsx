@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ReusableTable from "../ReusableTable";
-import RenderTezina from "../RenderTezina";
-import RenderOcena from "../RenderOcena";
+import ReusableTable from "../reusable/ReusableTable";
+import RenderTezina from "../reusable/RenderTezina";
+import RenderOcena from "../reusable/RenderOcena";
 
 const RoditeljDashboard = () => {
     const [ocene, setOcene] = useState([]);

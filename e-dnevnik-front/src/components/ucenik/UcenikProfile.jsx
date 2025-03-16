@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EditModal from "../EditModal";
+import EditModal from "../reusable/EditModal";
 import usePexelsImage from "../../hooks/usePexelsImage";
 
 const UcenikProfile = () => {
