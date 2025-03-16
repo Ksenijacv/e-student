@@ -12,6 +12,7 @@ import RoditeljDashboard from "./components/roditelj/RoditeljDashboard";
 import UcenikProfile from "./components/ucenik/UcenikProfile";
 import './App.css';
 import RoditeljProfile from "./components/roditelj/RoditeljProfile";
+import ProfesorProfile from "./components/profesor/ProfesorProfile";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -61,6 +62,7 @@ function App() {
                     {token && tipKorisnika === "profesor" && (
                         <>
                         <Route path="/dashboard-profesor" element={<ProfesorDashboard />} />
+                        <Route path='/profesor-profile' element={<ProfesorProfile />} />
                         </>
                     )}
 

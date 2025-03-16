@@ -233,6 +233,10 @@ select {
     margin-top: 0px;
 }
 
+.remove-btn {
+    margin-top: 0px;
+}
+
 .logout-button:hover {
     background-color: var(--text-color);
     color: var(--primary-color);
@@ -339,7 +343,7 @@ select {
     border-collapse: collapse;
     margin-top: 15px;
     background: var(--secondary-color);
-    opacity: 70%;
+    opacity: 90%;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -360,6 +364,34 @@ select {
 .reusable-table tr:hover {
     background-color: #43547a;
     transition: 0.3s;
+}
+
+.profesor-profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.profesor-profile-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column; 
+    gap: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sekcija sa tabelom predmeta */
+.subjects-section {
+    background-color: #2d3748;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    opacity: 100%;
+    margin-bottom: 20px;
 }
 
 

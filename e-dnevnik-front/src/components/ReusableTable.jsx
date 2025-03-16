@@ -14,8 +14,10 @@ const ReusableTable = ({ columns, data }) => {
                 {data.length > 0 ? (
                     data.map((row, index) => (
                         <tr key={index}>
-                            {columns.map((column) => (
-                                <td key={column.key}>{row[column.key]}</td>
+                            {columns.map((col, colIndex) => (
+                                <td key={`${index}-${colIndex}`}>
+                                    {col.render ? col.render(row) : row[col.key]}
+                                </td>
                             ))}
                         </tr>
                     ))
