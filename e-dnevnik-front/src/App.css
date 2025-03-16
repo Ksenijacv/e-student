@@ -441,6 +441,122 @@ select {
     text-decoration: underline;
 }
 
+.ucenik-dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    min-height: 600px;
+}
+
+.ocene-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    justify-content: space-evenly;
+}
+
+.ocena-card {
+    background: linear-gradient(135deg, #74c577, #4ba799);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    min-width: 200px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ocena-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ocena-card:hover {
+    transform: scale(1.05);
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #ffeb3b;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.card-header {
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.filter-sort-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-sort-container select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 300px;
+    cursor: pointer;
+}
+
+.card-body h3{
+ color: var(--primary-color);
+ font-size: 16px;
+}
+
+.tezina-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.tezina-dot {
+    font-size: 30px;
+    color: lightgray;
+}
+
+.tezina-dot.active {
+    color: #ffeb3b;
+}
+
+.tezina-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+
+
+
+
 
 
 

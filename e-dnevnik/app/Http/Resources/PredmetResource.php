@@ -19,7 +19,11 @@ class PredmetResource extends JsonResource
             'naziv' => $this->naziv,
             'opis' => $this->opis,
             'tezina' => $this->tezina,
-            'profesor_id' => $this->profesor ? $this->profesor->id : null, // Samo ID profesora
+            'profesor' => $this->profesor ? [
+                'id' => $this->profesor->id,
+                'ime' => $this->profesor->ime,
+            ] : null
+
         ];
     }
 }
