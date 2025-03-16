@@ -41,6 +41,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/roditelji/{id}', [RoditeljController::class, 'show']);
     Route::put('/roditelji/{id}', [RoditeljController::class, 'update']);
 
+    Route::get('/profesori/{id}', [ProfesorController::class, 'show']);
+    Route::put('/profesori/{id}', [ProfesorController::class, 'update']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     
