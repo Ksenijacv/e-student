@@ -13,6 +13,7 @@ import UcenikProfile from "./components/ucenik/UcenikProfile";
 import './App.css';
 import RoditeljProfile from "./components/roditelj/RoditeljProfile";
 import ProfesorProfile from "./components/profesor/ProfesorProfile";
+import Footer from "./components/Footer";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -81,6 +82,7 @@ function App() {
                     )}
                 </Routes>
             </BrowserRouter>
+            <Footer/>
         </div>
     );
 }

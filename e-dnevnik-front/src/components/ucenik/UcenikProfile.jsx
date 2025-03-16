@@ -32,9 +32,9 @@ const UcenikProfile = () => {
 
             setUcenik(response.data.data);
             setEditableFields({
-                razred: response.data.razred,
-                odeljenje: response.data.odeljenje,
-                roditelj_id: response.data.roditelj ? response.data.roditelj.id : "",
+                razred: response.data.data.razred,
+                odeljenje: response.data.data.odeljenje,
+                roditelj_id: response.data.data.roditelj ? response.data.data.roditelj.id : "",
             });
 
         } catch (err) {
@@ -56,7 +56,7 @@ const UcenikProfile = () => {
     }, [ucenikId, token]);
 
    
-//azuriranje profila ucenika
+//azuriranje profila
     const handleUpdate = async (updatedData) => {
         try {
             const response = await axios.put(
