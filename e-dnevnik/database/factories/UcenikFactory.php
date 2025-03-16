@@ -18,8 +18,8 @@ class UcenikFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory()->create(['tip_korisnika' => 'ucenik'])->id,
-            'ime' => $this->faker->firstName(),
-            'razred' => $this->faker->numberBetween(1, 8), // osnovna škola, ili 1-4 za srednju
+            'ime' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
+            'razred' => $this->faker->numberBetween(1, 8), 
             'odeljenje' => $this->faker->numberBetween(1, 5) ,
             'roditelj_id' => \App\Models\Roditelj::factory(),
         ];

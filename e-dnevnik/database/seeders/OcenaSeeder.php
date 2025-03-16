@@ -2,30 +2,32 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ocena;
-use App\Models\Predmet;
-use App\Models\Ucenik;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Ocena;
+use App\Models\Ucenik;
+use App\Models\Predmet;
 
 class OcenaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        $ucenik = Ucenik::first(); // Uzmi prvog učenika
-        $predmeti = Predmet::all(); // Uzmi sve predmete
+        $ucenici = Ucenik::all();
+        $predmeti = Predmet::whereIn('id', range(1, 9))->get(); // Predmeti sa ID 1-9
 
-        foreach ($predmeti as $predmet) {
-            Ocena::factory()->create([
-                'ucenik_id' => $ucenik->id,
-                'predmet_id' => $predmet->id,
-                'ocena' => rand(2, 5), // Ocene od 2 do 5
-                'datum' => now()->subDays(rand(1, 30)),
-                'komentar' => 'Dobro urađeno!',
-            ]);
+        foreach ($ucenici as $ucenik) {
+            $imaOcenu = true; // Početna vrednost da učenik naizmenično dobija ocenu
+
+            foreach ($predmeti as $predmet) {
+                Ocena::create([
+                    'ucenik_id' => $ucenik->id,
+                    'predmet_id' => $predmet->id,
+                    'ocena' => $imaOcenu ? rand(1, 5) : null, // Naizmenično dodeljuje ocenu
+                    'datum' => $imaOcenu ? now()->subDays(rand(1, 30)) : null,
+                    'komentar' => $imaOcenu ? 'Dobro urađeno!' : 'Nije ocenjeno',
+                ]);
+
+                $imaOcenu = !$imaOcenu; // Naizmenično menjamo da li učenik ima ocenu ili ne
+            }
         }
     }
 }

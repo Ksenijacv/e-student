@@ -25,5 +25,20 @@ class RoditeljSeeder extends Seeder
             'ime' => 'Ana Petrović',
             'kontakt' => '0641234567',
         ]);
+
+        //jos 5 random roditelja
+        for ($i = 0; $i < 5; $i++) {
+            $randomUser = User::factory()->create([
+                'email' => "roditelj$i@example.com",
+                'password' => bcrypt('password123'),
+                'tip_korisnika' => 'roditelj',
+            ]);
+    
+            Roditelj::factory()->create([
+                'user_id' => $randomUser->id,
+                'ime' => fake()->name(),
+                'kontakt' => fake()->phoneNumber(),
+            ]);
+        }
     }
 }
