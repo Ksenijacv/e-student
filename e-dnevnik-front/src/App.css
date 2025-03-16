@@ -475,7 +475,7 @@ select {
     transition: transform 0.2s ease-in-out;
 }
 
-.ocena-body {
+.ocena-body, .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -484,24 +484,6 @@ select {
 
 .ocena-card:hover {
     transform: scale(1.05);
-}
-
-.progress-bar {
-    width: 300px;
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background-color: #ffeb3b;
-    text-align: center;
-    line-height: 20px;
-    font-weight: bold;
-    color: black;
 }
 
 .card-header {
@@ -530,27 +512,23 @@ select {
  font-size: 16px;
 }
 
-.tezina-container {
+.table-section {
+    margin: 10px;
+    width: 1380px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.roditelj-dashboard {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-}
-
-.tezina-dot {
-    font-size: 30px;
-    color: lightgray;
-}
-
-.tezina-dot.active {
-    color: #ffeb3b;
-}
-
-.tezina-wrapper {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 0px;
+    margin-top: 20px;
 }
 
 

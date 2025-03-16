@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import RenderTezina from "../RenderTezina";
+import RenderOcena from "../RenderOcena";
 
 const UcenikDashboard = () => {
     const [ocene, setOcene] = useState([]);
@@ -48,19 +50,6 @@ const UcenikDashboard = () => {
         }
     });
 
-//za prikaz tackica za tezinu
-const renderTezina = (tezina) => {
-    return (
-        <div className="tezina-container">
-            {[...Array(5)].map((_, index) => (
-                <span
-                    key={index} className={`tezina-dot ${index < tezina ? "active" : ""}`}>
-                    ●
-                </span>
-             ))}
-        </div>
-    );
-};
 
     return (
         <div className="ucenik-dashboard">
@@ -91,26 +80,15 @@ const renderTezina = (tezina) => {
                         </div>
                         <div className="card-body">
                             <h3>{ocena.predmet.opis}</h3>
-
-                            <div className="progress-bar">
-                            <div
-                                className="progress-bar-fill"
-                                style={{ width: `${(ocena.ocena / 5) * 100}%` }}
-                            >
-                                {ocena.ocena ? ocena.ocena : "N/A"}
-                            </div>
-                        </div>
-                            <div className="tezina-wrapper">
-                                <strong>Težina:</strong>
-                                {renderTezina(ocena.predmet.tezina)}
-                            </div>
-
+                            <RenderOcena ocena={ocena.ocena}/>
+                            <RenderTezina tezina={ocena.predmet.tezina}/>
                             <p><strong>Profesor:</strong> {ocena.predmet.profesor ? ocena.predmet.profesor.ime : "Nepoznato"}</p>
+                            <p><strong>Datum ocene:</strong> {ocena.datum}</p>
+                            <p><strong>Komentar profesora:</strong> {ocena.komentar}</p>
                         </div>
 
                        
-                        <p><strong>Datum ocene:</strong> {ocena.datum}</p>
-                        <p><strong>Komentar profesora:</strong> {ocena.komentar}</p>
+                
                     </div>
                 ))}
             </div>
