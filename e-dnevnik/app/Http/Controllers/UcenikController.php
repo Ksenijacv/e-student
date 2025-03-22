@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UcenikResource;
+use App\Models\Ocena;
+use App\Models\Predmet;
 use App\Models\Ucenik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +35,21 @@ class UcenikController extends Controller
         return new UcenikResource($ucenik);
     }
 
+    public function dodeliPrazneOceneZaSvePredmete($ucenikId)
+    {
+        $predmeti = Predmet::all();
+
+        foreach ($predmeti as $predmet) {
+            Ocena::create([
+                'ucenik_id' => $ucenikId,
+                'predmet_id' => $predmet->id,
+                'ocena' => null,
+                'datum' => null,
+                'komentar' => 'Nije ocenjeno',
+            ]);
+        }
+    }
+
    
         public function store(Request $request)
         {
@@ -51,6 +68,9 @@ class UcenikController extends Controller
                 'odeljenje' => $request->odeljenje,
                 'roditelj_id' => $request->roditelj_id,
             ]);
+
+            //da kada se ucenik registruje, da dobije sve predmete dodeljene u app
+            $this->dodeliPrazneOceneZaSvePredmete($ucenik->id);
 
             return response()->json([
                 'message' => 'Ucenik uspesno kreiran.',
