@@ -180,6 +180,45 @@ class ProfesorController extends Controller
             ], 200);
         }
 
+        public function mojDashboard()
+        {
+            $user = Auth::user();
+
+            if ($user->tip_korisnika !== 'profesor') {
+                return response()->json(['error' => 'Nemate pristup.'], 403);
+            }
+        
+            $profesor = Profesor::where('user_id', $user->id)->first();
+        
+            if (!$profesor) {
+                return response()->json(['error' => 'Profesor nije pronađen.'], 404);
+            }
+        
+            $predmeti = Predmet::where('profesor_id', $profesor->id)
+                ->with(['ocene.ucenik']) // učitava ocene + učenike
+                ->get();
+        
+            $rezultat = $predmeti->map(function ($predmet) {
+                return [
+                    'id' => $predmet->id,
+                    'naziv' => $predmet->naziv,
+                    'ucenici' => $predmet->ocene->map(function ($ocena) {
+                        return [
+                            'ime' => $ocena->ucenik->ime,
+                            'ocena' => $ocena->ocena,
+                            'datum' => $ocena->datum,
+                            'komentar' => $ocena->komentar,
+                            'ocena_id' => $ocena->id,
+                            'ucenik_id' => $ocena->ucenik_id
+                        ];
+                    })
+                ];
+            });
+        
+            return response()->json($rezultat);
+        }
+        
+
 
 
 

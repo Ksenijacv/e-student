@@ -33,12 +33,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/roditelji/{id}', [RoditeljController::class, 'show']);
     Route::put('/roditelji/{id}', [RoditeljController::class, 'update']);
 
+    //za profesora - sta sve radi
     Route::get('/profesori/{id}', [ProfesorController::class, 'show']);
     Route::put('/profesori/{id}', [ProfesorController::class, 'update']);
     Route::post('/profesori/dodaj-predmet', [ProfesorController::class, 'dodajPredmet']);
     Route::delete('/profesori/ukloni-predmet/{predmet_id}', [ProfesorController::class, 'ukloniPredmet']);
 
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
+    
+    Route::get('/profesor/dashboard', [ProfesorController::class, 'mojDashboard']);
 
     //za admina - sta sve radi
     Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
