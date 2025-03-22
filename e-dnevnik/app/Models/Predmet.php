@@ -13,7 +13,7 @@ class Predmet extends Model
 
     protected $fillable = [
         'naziv', // naziv predmeta
-        'opis', // opis predmeta (opciono)
+        'opis', // opis predmeta 
         'tezina', // tezina predmeta
         'profesor_id', // profesor koji predaje predmet
     ];

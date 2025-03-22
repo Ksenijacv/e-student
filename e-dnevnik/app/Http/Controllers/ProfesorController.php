@@ -40,10 +40,10 @@ class ProfesorController extends Controller
         // Validacija podataka
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'ime' => 'required|string|max:255',
-            'titula' => 'required|string|max:255',
-            'kabinet' => 'required|string|max:255',
-            'konsultacije' => 'required|string|max:255',
+            'ime' => 'required|string',
+            'titula' => 'required|string',
+            'kabinet' => 'required|string',
+            'konsultacije' => 'required|string',
         ]);
 
         // Kreiranje profesora
@@ -85,9 +85,9 @@ class ProfesorController extends Controller
 
             // Validacija podataka
             $validated = $request->validate([
-                'titula' => 'required|string|max:255',
-                'kabinet' => 'required|string|max:255',
-                'konsultacije' => 'required|string|max:255',
+                'titula' => 'required|string',
+                'kabinet' => 'required|string',
+                'konsultacije' => 'required|string',
             ]);
 
             // Ažuriranje podataka profesora

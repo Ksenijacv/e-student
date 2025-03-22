@@ -8,16 +8,6 @@ use App\Http\Controllers\RoditeljController;
 use App\Http\Controllers\OcenaController;
 use App\Http\Controllers\PredmetController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -27,13 +17,16 @@ Route::post('/profesor', [ProfesorController::class, 'store']);
 Route::post('/ucenik', [UcenikController::class, 'store']);
 Route::post('/roditelj', [RoditeljController::class, 'store']);
 
+//prikaz 
 Route::get('/profesori', [ProfesorController::class, 'index']);
 Route::get('/ucenici', [UcenikController::class, 'index']);
 Route::get('/roditelji', [RoditeljController::class, 'index']);
 Route::get('/ocene', [OcenaController::class, 'index']);
 Route::get('/predmeti', [PredmetController::class, 'index']);
 
+//zasticena grupna ruta
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
     Route::get('/ucenici/{id}', [UcenikController::class, 'show']);
     Route::put('/ucenici/{id}', [UcenikController::class, 'update']);
 
@@ -47,7 +40,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
 
+    //za admina - sta sve radi
     Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
+    Route::resource('predmeti', PredmetController::class)->only([
+        'store', 'update']);
+    Route::patch('/predmeti/{id}/ukloni-profesora', [PredmetController::class, 'ukloniProfesora']);
 
     Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
     Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
