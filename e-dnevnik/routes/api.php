@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //za admina - sta sve radi
     Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
     Route::resource('predmeti', PredmetController::class)->only([
-        'store', 'update']);
+        'store', 'update', 'destroy']);
     Route::patch('/predmeti/{id}/ukloni-profesora', [PredmetController::class, 'ukloniProfesora']);
 
     Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);

@@ -104,6 +104,21 @@ const AdminPredmeti = () => {
             alert("Greška pri ažuriranju.");
         }
     };
+
+    const handleDeletePredmet = async (id) => {
+        if (!window.confirm("Da li ste sigurni da želite da obrišete ovaj predmet?")) return;
+    
+        try {
+            await axios.delete(`http://127.0.0.1:8000/api/predmeti/${id}`, { headers });
+    
+            setPredmeti(prev => prev.filter(p => p.id !== id));
+            alert("Predmet je uspešno obrisan.");
+        } catch (error) {
+            console.error("Greška pri brisanju predmeta:", error);
+            alert("Došlo je do greške pri brisanju.");
+        }
+    };
+    
     
 
     //kolone za tabelu
@@ -136,9 +151,13 @@ const AdminPredmeti = () => {
                     <button onClick={() => handleRemoveProfessor(predmet.id)} className="remove-btn">
                         Ukloni profesora
                     </button>
+                    <button onClick={() => handleDeletePredmet(predmet.id)} className="delete-btn">
+                        Obriši
+                    </button>
                 </>
             )
         }
+        
     ];
     
 

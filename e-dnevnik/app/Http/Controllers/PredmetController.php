@@ -89,6 +89,21 @@ class PredmetController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $user = Auth::user();
+
+        if (!$user || $user->tip_korisnika !== 'admin') {
+            return response()->json(['message' => 'Niste autorizovani za ovu akciju.'], 403);
+        }
+
+        $predmet = Predmet::findOrFail($id);
+        $predmet->delete();
+
+        return response()->json(['message' => 'Predmet uspešno obrisan.']);
+    }
+
+
 
     //pregled dostupnih predmeta za izbor - za profesora
     public function dostupniPredmeti()
