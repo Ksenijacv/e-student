@@ -133,20 +133,21 @@ const RoditeljDashboard = () => {
                 ) : (
                     <p>Nema dostupnih ocena.</p>
                 )}
+                {/* Paginacija */}
+                <div className="pagination">
+                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+                        Prethodna
+                    </button>
+                    <button
+                        disabled={indexOfLastItem >= sortiraneOcene.length}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                    >
+                        Sledeća
+                    </button>
+                </div>
             </div>
 
-            {/* Paginacija */}
-            <div className="pagination">
-                <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
-                    Prethodna
-                </button>
-                <button
-                    disabled={indexOfLastItem >= sortiraneOcene.length}
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                    Sledeća
-                </button>
-            </div>
+            
         </div>
     );
 };

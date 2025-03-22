@@ -521,19 +521,35 @@ select {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding-left: 40px;
     padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .table-section button {
     margin-left: 10px;
 }
 
-.roditelj-dashboard, .admin-dashboard, .admin-subjects-page{
+.roditelj-dashboard, .admin-dashboard, .admin-subjects-page, .profesor-dashboard, .predmet-block{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     min-height: 500px;
+}
+
+.predmet-block h3 {
+    color: var(--accent-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.predmet-block h3:hover {
+    color: var(--accent-color-hover);
+    transform: scale(1.2);
 }
 
 .chart-section {
@@ -547,7 +563,7 @@ select {
 }
 
 .pagination {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     gap: 20px;
