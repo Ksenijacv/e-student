@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\OcenaResource;
 use App\Http\Resources\UcenikResource;
 use App\Models\Ocena;
+use App\Models\Profesor;
 use App\Models\Roditelj;
 use App\Models\Ucenik;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class OcenaController extends Controller
         return OcenaResource::collection($ocene);
     }
 
+    //za ucenika da vidi svoje ocene
     public function vratiMojeOcene()
     {
         $user = Auth::user();
@@ -41,6 +43,7 @@ class OcenaController extends Controller
         return OcenaResource::collection($ocene);
     }
 
+    //za roditelja
     public function vratiOceneMojeDece()
     {
         $user = Auth::user();
@@ -61,6 +64,43 @@ class OcenaController extends Controller
         $ucenici = Ucenik::with(['ocene.predmet.profesor'])->where('roditelj_id', $roditelj->id)->get();
 
         return  UcenikResource::collection($ucenici);
+    }
+
+    //za profesora da upise ocene ucenicima
+    public function azurirajOcenu(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user->tip_korisnika !== 'profesor') {
+            return response()->json(['error' => 'Nemate pristup.'], 403);
+        }
+
+        $validated = $request->validate([
+            'ocena_id' => 'required|exists:ocene,id',
+            'ocena' => 'required|integer|min:1|max:5',
+            'komentar' => 'nullable|string',
+        ]);
+
+        $ocena = Ocena::with('predmet')->findOrFail($validated['ocena_id']);
+
+        // Da li profesor pradaje taj predmet
+        $profesor = Profesor::where('user_id', $user->id)->first();
+
+        if (!$profesor || $ocena->predmet->profesor_id !== $profesor->id) {
+            return response()->json(['error' => 'Nemate pravo da izmenite ovu ocenu.'], 403);
+        }
+
+        // Ažuriramo ocenu
+        $ocena->update([
+            'ocena' => $validated['ocena'],
+            'komentar' => $validated['komentar'],
+            'datum' => now()->toDateString(), //da bude samo dan
+        ]);
+
+        return response()->json([
+            'message' => 'Ocena uspešno ažurirana.',
+            'data' => $ocena->load('ucenik')
+        ]);
     }
 
     

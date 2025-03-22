@@ -40,8 +40,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/profesori/ukloni-predmet/{predmet_id}', [ProfesorController::class, 'ukloniPredmet']);
 
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
-    
+
     Route::get('/profesor/dashboard', [ProfesorController::class, 'mojDashboard']);
+    Route::patch('/profesor/oceni', [OcenaController::class, 'azurirajOcenu']);
 
     //za admina - sta sve radi
     Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
