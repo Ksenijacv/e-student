@@ -15,6 +15,7 @@ import RoditeljProfile from "./components/roditelj/RoditeljProfile";
 import ProfesorProfile from "./components/profesor/ProfesorProfile";
 import Footer from "./components/reusable/Footer";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminPredmeti from "./components/admin/AdminPredmeti";
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
                      {token && tipKorisnika === "admin" && (
                         <>
                         <Route path="/dashboard-admin" element={<AdminDashboard />} />
+                        <Route path="/predmeti-admin" element={<AdminPredmeti />} />
                         </>
                     )}
                 </Routes>

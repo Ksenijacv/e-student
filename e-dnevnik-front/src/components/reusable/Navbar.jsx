@@ -63,6 +63,7 @@ const Navbar = ({ token, setToken, tipKorisnika }) => {
                         <>
                             <li>
                                 <Link to="/dashboard-admin">Dashboard Administratora</Link>
+                                <Link to="/predmeti-admin">Upravljanje Predmetima</Link>
                             </li>
                         
                         </>

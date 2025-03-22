@@ -523,7 +523,11 @@ select {
     padding-right: 40px;
 }
 
-.roditelj-dashboard, .admin-dashboard{
+.table-section button {
+    margin-left: 10px;
+}
+
+.roditelj-dashboard, .admin-dashboard, .admin-subjects-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -547,6 +551,49 @@ select {
     display: flex;
     flex-direction: row;
     gap: 20px;
+}
+
+.add-subject-form {
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    gap:5px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+    width: 600px;
+    display: flex;
+    flex-direction: column; 
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.add-subject-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.add-subject-form input::placeholder {
+    color: #a0a0a0;
+}
+
+.add-subject-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    flex-wrap: wrap; 
+    margin-top: 0px;
+}
+
+.add-subject-image img {
+    max-width: 430px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 
